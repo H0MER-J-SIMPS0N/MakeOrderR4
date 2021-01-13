@@ -1,0 +1,55 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MakeOrderR4v2.Views.NomenclatureView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="5*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid Grid.Row="0" Grid.Column="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="6*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <TextBox Grid.Column="0" Text="{Binding TextToFind}" />
+      <Button Grid.Column="1" Content="Поиск" Command="{Binding FindNomenclatureCommand}" />
+    </Grid>
+    <TextBlock Grid.Row="1" Grid.Column="0" Text="Найденные исследования:" VerticalAlignment="Center" />
+    <ListBox Items="{Binding FoundNomenclaturePositions}" SelectedItem="{Binding SelectedFoundPosition}" Grid.Row="2" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  >
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding }" />
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    <TextBlock Grid.Row="3" Grid.Column="0" Text="Выбранные исследования:" VerticalAlignment="Center" />
+    <ListBox Items="{Binding Order.Positions}" SelectedItem="{Binding SelectedAddedPosition}" Grid.Row="4" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  >
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Value}"  />
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Contract}" />
+    <Button Grid.Row="1" Grid.Column="1" Content="Запросить каталог" Command="{Binding GetNomenclatureBundleCommand}" />
+    <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom">
+      <Button Content="Добавить" Command="{Binding AddPositionCommand}" />
+      <Button Content="Удалить" Command="{Binding RemovePositionCommand}" />
+      <Button Content="Удалить все" Command="{Binding RemoveAllPositionsCommand}" />
+    </StackPanel>
+    <StackPanel Grid.Row="4" Grid.Column="1" VerticalAlignment="Bottom">
+      <Button Content="Дальше" Command="{Binding MakeBundleOfPositionsCommand}" />
+      <ProgressBar IsIndeterminate="{Binding IsWaiting}" VerticalAlignment="Bottom" />
+    </StackPanel>
+  </Grid>
+</UserControl>

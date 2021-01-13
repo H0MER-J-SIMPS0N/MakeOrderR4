@@ -1,0 +1,60 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="MakeOrderR4v2.Views.SelectSamplesView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="21*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <TextBlock Text="Введите Bundle со всеми ресурсами заказа:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" />
+    <TextBox Text="{Binding Order.PositionsBundle}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" />
+    <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="10*" />
+        <RowDefinition Height="10*" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Button Content="Выбрать образцы" Grid.Row="0" Grid.Column="1" Command="{Binding SelectSpecimensCommand}"  />
+      <ListBox Grid.Row="1" Grid.Column="1"  Items="{Binding ExactlyOneSpecimensNomenclature}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              <TextBox Text="{Binding Value.Name}" IsReadOnly="True" Background="PeachPuff" />
+              <ListBox Items="{Binding Value.SpecimensToSelect}" SelectionMode="Single" SelectedItems="{Binding Value.SelectedSpecimens}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding TypeCollected.Text}" />
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <ListBox Grid.Row="2" Grid.Column="1"  Items="{Binding ManySpecimensNomenclature}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              <TextBox Text="{Binding Value.Name}" IsReadOnly="True" Background="PeachPuff" />
+              <ListBox SelectionMode="Multiple" Items="{Binding Value.SpecimensToSelect}" SelectedItems="{Binding Value.SelectedSpecimens}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding TypeCollected.Text}" />
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <Button Content="Готово!" Grid.Row="3" Command="{Binding CreatePreanalyticsBundleCommand}" />
+    </Grid>
+  </Grid>
+</UserControl>

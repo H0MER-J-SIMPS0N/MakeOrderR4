@@ -1,0 +1,12 @@
+{
+	"TokenAddress": "https://auth-stage.medlinx.online/connect/token",
+	"Data": {
+		"grant_type": "password",
+		"client_id": "client_id",
+		"client_secret": "client_secret",
+		"scope": "scopes",
+		"username": "username",
+		"password": "password"
+	},
+	"BaseUrl": "https://api-stage.medlinx.online/"
+}

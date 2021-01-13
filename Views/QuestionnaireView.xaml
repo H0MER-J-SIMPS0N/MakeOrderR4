@@ -1,0 +1,59 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MakeOrderR4v2.Views.QuestionnaireView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <TextBlock Text="Введите Bundle с опросником:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.BundleForQuestionnaire}" IsReadOnly="True" Grid.Row="1" Grid.Column="0" Margin="1"/>
+    <TextBlock Text="Результат:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.QuestionnaireBundleWithAnswers}" IsReadOnly="True" Grid.Row="3" Grid.Column="0" Margin="1"/>
+    <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="4">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="10*" />
+        <RowDefinition Height="10*" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Button Content="Получить вопросы" Grid.Row="0" Grid.Column="1" Command="{Binding GetQuestionsCommand}" Margin="1" />
+      <ListBox Grid.Row="1" Grid.Column="1"  Items="{Binding StringItems}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              <TextBox Text="{Binding Description}" IsReadOnly="True" Background="PeachPuff" />
+              <TextBox Text="{Binding Answer}" Watermark="{Binding Watermark}" BorderBrush="{Binding ValidateColor}" />
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <ListBox Grid.Row="2" Grid.Column="1"  Items="{Binding ChoiceItems}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+              <TextBox Text="{Binding Description}" IsReadOnly="True" Background="PeachPuff" />
+              <ComboBox Items="{Binding AnswerItems}" SelectedItem="{Binding SelectedAnswer}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="{Binding ValidateColor}" >
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Display}" />
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <Button Content="Готово!" Grid.Row="3" Command="{Binding CreateBundleWithAnswersCommand}" Margin="1" />
+    </Grid>
+  </Grid>
+</UserControl>

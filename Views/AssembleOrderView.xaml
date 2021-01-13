@@ -1,0 +1,32 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MakeOrderR4v2.Views.AssembleOrderView">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+    </Grid.RowDefinitions>
+    <TextBlock Text="Введите Bundle с исследованиями:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.PositionsBundle}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Margin="1" />
+    <TextBlock Text="Введите преаналитику:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.PreanalyticsBundle}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0" Margin="1" />
+    <TextBlock Text="Введите опросник:" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.QuestionnaireBundleWithAnswers}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Margin="1" />
+    <TextBlock Text="Результат:" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.ResultBundle}" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="1" Margin="1" />
+    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button Content="Отправить заказ на сервис" Command="{Binding SendResultBundleCommand}" IsVisible="{Binding !IsWaiting}" Margin="1" />
+      <Button Content="Собрать Bundle заказа" Command="{Binding CreateResultBundleCommand}" IsVisible="{Binding !IsWaiting}" Margin="1" />
+    </StackPanel>
+    <ProgressBar IsIndeterminate="{Binding IsWaiting}" HorizontalAlignment="Right" IsVisible="{Binding IsWaiting}" Margin="1" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" />
+  </Grid>
+</UserControl>

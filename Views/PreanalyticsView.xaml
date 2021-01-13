@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MakeOrderR4v2.Views.PreanalyticsView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10*" />
+    </Grid.RowDefinitions>
+    <TextBlock Text="Введите Bundle:" Grid.Row="0" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.PreanalyticsRequestBundle}" Grid.Row="1" Margin="1" IsReadOnly="True" />
+    <TextBlock Text="Результат преаналитики:" Grid.Row="2" VerticalAlignment="Bottom" Margin="1" />
+    <TextBox Text="{Binding Order.PreanalyticsBundle}" IsReadOnly="True" Grid.Row="3" Margin="1" />
+    <Button Content="Получить преаналитику" Grid.Row="2" Command="{Binding GetPreanalyticsCommand}" HorizontalAlignment="Right" IsVisible="{Binding !IsWaiting}" Margin="1" />
+    <ProgressBar Grid.Row="2" IsIndeterminate="{Binding IsWaiting}" HorizontalAlignment="Right" IsVisible="{Binding IsWaiting}" Margin="1" />
+  </Grid>
+</UserControl>
